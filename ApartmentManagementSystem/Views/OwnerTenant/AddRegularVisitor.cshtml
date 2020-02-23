@@ -1,0 +1,106 @@
+﻿@using ApartmentManagementSystem.Models
+@model CombineModel
+@{
+    ViewBag.Title = "AddRegularVisitor";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        debugger;
+        $('#btnclear').click(function () {
+            debugger;
+            $('.form-control').val("");
+            $('#Gender').prop('checked', false);
+            return false;
+        })
+    })
+</script>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding-right:20px; border-right: 1px solid #ccc;">
+                <h2>AddRegularVisitor</h2>
+                <div class="form-group">
+                    @Html.LabelFor(name => name.GetModel.Name):
+                    @Html.TextBoxFor(name => name.GetModel.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(name => name.GetModel.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Age => Age.GetModel.Age):
+                    @Html.TextBoxFor(Age => Age.GetModel.Age, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(age => age.GetModel.Age, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(gender => gender.GetModel.Gender):
+                    @Html.RadioButtonFor(Gender => Gender.GetModel.Gender, "Male")<label>Male</label>
+                    @Html.RadioButtonFor(Gender => Gender.GetModel.Gender, "Female")<label>Female</label>
+                    @Html.ValidationMessageFor(Gender => Gender.GetModel.Gender, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Cell => Cell.GetModel.Cell):
+                    @Html.TextBoxFor(Cell => Cell.GetModel.Cell, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Cell => Cell.GetModel.Cell, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(relation => relation.GetModel.Relation):
+                    @Html.DropDownListFor(relation => relation.GetModel.Relation, new SelectList(Model.GetModel.lstrelation), "--select--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(relation => relation.GetModel.Relation, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(address => address.GetModel.Address)
+                    @Html.TextAreaFor(address => address.GetModel.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(address => address.GetModel.Address, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(email => email.GetModel.Email, new { @class = "hidden" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" id="btnadd" value="Add" name="operation" style=" margin-left:50px" />
+                    <input type="submit" id="btnclear" value="Clear" name="operation" class="cancel" style=" margin-left:50px" />
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="col-md-8 ">
+                <h2>Your Regular Visitors</h2>
+                <label style="color:dodgerblue">You Can Add Only Six(6) Regular Visitor</label>
+                <table border="1" class="table table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Cell No</th>
+                        <th>Relation</th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (FamilyModel lst in Model.lstmodel)
+                    {
+                        <tr>
+                            <td>@lst.Id</td>
+                            <td>@lst.Name</td>
+                            <td>@lst.Age</td>
+                            <td>@lst.Gender</td>
+                            <td>@lst.Cell</td>
+                            <td>@lst.Relation</td>
+                            <td>
+                                @Html.ActionLink("Delete", "DeleteRegularVisitor", new { id = lst.Id }, new { onclick = "return confirm('Are you sure you want to delete?');" })
+                            </td>
+                        </tr>
+                    }
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
+
+

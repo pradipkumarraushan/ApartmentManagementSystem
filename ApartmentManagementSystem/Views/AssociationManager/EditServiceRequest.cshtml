@@ -1,0 +1,58 @@
+﻿@using ApartmentManagementSystem.Models
+@model FamilyModel
+@{
+    ViewBag.Title = "EditServiceRequest";
+}
+
+<h2>EditServiceRequest</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(id => id.Id)
+                    @Html.TextBoxFor(id => id.Id, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(name => name.Name)
+                    @Html.TextBoxFor(name => name.Name, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(cell => cell.Cell)
+                    @Html.TextBoxFor(cell => cell.Cell, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(block => block.Block)
+                    @Html.TextBoxFor(block => block.Block, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(flatno => flatno.Flat_no)
+                    @Html.TextBoxFor(flatno => flatno.Flat_no, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(complain_type => complain_type.ComplainType)
+                    @Html.TextBoxFor(complain_type => complain_type.ComplainType, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(complain => complain.ComplainDescription)
+                    @Html.TextAreaFor(complain => complain.ComplainDescription, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(request_date => request_date.RequestDate)
+                    @Html.TextBoxFor(request_date => request_date.RequestDate, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(service_provider=> service_provider.Service_Provider)
+                    @Html.TextBoxFor(service_provider=> service_provider.Service_Provider, new { @class="form-control"})
+                </div>
+                <div>
+                    <input type="submit" id="btnupdate" value="Update" name="operation" />
+                </div>
+            </div>
+            </div>
+        </div>
+        
+ }

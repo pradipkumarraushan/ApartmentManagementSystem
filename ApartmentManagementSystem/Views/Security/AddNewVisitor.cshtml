@@ -1,0 +1,101 @@
+﻿@using ApartmentManagementSystem.Models
+@model VisitorModel
+
+@{
+    ViewBag.Title = "AddNewVisitor";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnsearch').click(function () {
+            debugger;
+            var cell = $('#Visitor_Cellno').val();
+            if (cell == "") {
+                $('#cellvalidate').text('Please enter cell number');
+                return false;
+            }
+        })
+        $('#btnclear').click(function () {
+            debugger;
+            $('.form-control').val("");
+            $('#Gender').prop('checked', false);
+            return false;
+        })
+    })
+</script>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h2>Add New Visitor</h2>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @Html.LabelFor(cell => cell.Visitor_Cellno):
+                            @Html.TextBoxFor(cell => cell.Visitor_Cellno, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(cell => cell.Visitor_Cellno, "", new { @class = "text-danger",@id="cellvalidate" })
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" id="btnsearch" value="Search" name="operation" class="cancel" style="margin-top:30px" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(name => name.VisitorName):
+                    @Html.TextBoxFor(name => name.VisitorName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(name => name.VisitorName, "", new { @class="text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Age => Age.Age):
+                    @Html.TextBoxFor(Age => Age.Age, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Age => Age.Age, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Gender => Gender.Gender):
+                    @Html.RadioButtonFor(Gender => Gender.Gender, "Male")<label>Male</label>
+                    @Html.RadioButtonFor(Gender => Gender.Gender, "Female")<label>Female</label>
+                    @Html.ValidationMessageFor(Gender => Gender.Gender, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(relation => relation.Relation):
+                    @Html.DropDownListFor(relation => relation.Relation, new SelectList(Model.lstrelation), "--select--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(relation => relation.Relation, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Address => Address.Address):
+                    @Html.TextAreaFor(Address => Address.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Address=>Address.Address,"",new { @class="text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(member => member.MemberName):
+                    @Html.TextBoxFor(member => member.MemberName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(member => member.MemberName, "", new { @class="text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(block => block.Block)
+                    @Html.DropDownListFor(block => block.Block, new SelectList(Model.lstblock), "--select--", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(block => block.Block, "", new { @class="text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(flat_no => flat_no.Flatno):
+                    @Html.TextBoxFor(flat_no => flat_no.Flatno, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(flat_no => flat_no.Flatno, "", new { @class="text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(intime => intime.In_Time)
+                    @Html.TextBoxFor(intime => intime.In_Time, new { @class = "form-control" ,@readonly = "readonly" })
+                    @Html.LabelFor(outtime => outtime.Out_Time)
+                    @Html.TextBoxFor(outtime => outtime.Out_Time, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" id="btnin" value="In" name="operation" />
+                    <input type="submit" id="btnout" value="Out" name="operation" style=" margin-left:50px" />
+                    <input type="submit" id="btnclear" value="Clear" name="operation" class="cancel" style=" margin-left:50px" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+<h2>Home</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @*@Html.ActionLink("AddOwnerTenant", "AddOwnerTenant")*@
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Go To Owner Home Page","Home","OwnerTenant")
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @*@Html.ActionLink("Visitor History", "VisitorHistory","Security")*@
+            </div>
+            <div class="form-group">
+                @Html.ActionLink("Visitor History", "VisitorHistory","Security")
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @*@Html.ActionLink("GetAllServiceRequest", "GetServiceRequest")*@
+            </div>
+            @*<div class="form-group">
+                    @Html.ActionLink("DisplayAssociationMember", "DisplayAssociationMember")
+                </div>*@
+        </div>
+    </div>
+</div>
+

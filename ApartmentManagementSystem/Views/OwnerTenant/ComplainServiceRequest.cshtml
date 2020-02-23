@@ -1,0 +1,84 @@
+﻿@using ApartmentManagementSystem.Models
+@model CombineModel
+@{
+    ViewBag.Title = "ComplainServiceRequest";
+}
+
+<h2>ComplainServiceRequest</h2>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding-right:20px; border-right: 1px solid #ccc;">
+                <div class="form-group">
+                    @Html.LabelFor(name => name.GetModel.Name)
+                    @Html.TextBoxFor(name => name.GetModel.Name, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(cell => cell.GetModel.Cell)
+                    @Html.TextBoxFor(cell => cell.GetModel.Cell, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(block => block.GetModel.Block)
+                    @Html.TextBoxFor(block => block.GetModel.Block, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(flatno => flatno.GetModel.Flat_no)
+                    @Html.TextBoxFor(flatno => flatno.GetModel.Flat_no, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(complain_type => complain_type.GetModel.ComplainType)
+                    @Html.DropDownListFor(complain_type => complain_type.GetModel.ComplainType, new SelectList(Model.GetModel.lstcomplaintype), "--select--", new { @class = "form-control" })\
+                    @Html.ValidationMessageFor(complain_type=> complain_type.GetModel.ComplainType,"",new { @class="text-danger"})
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(complain => complain.GetModel.ComplainDescription)
+                    @Html.TextAreaFor(complain => complain.GetModel.ComplainDescription, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(complain => complain.GetModel.ComplainDescription, "", new { @class = "text-danger" })
+                </div>
+                <div>
+                    <input type="submit" id="btnsend" value="Send Request" name="operation" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <table border="1" class="table table-bordered ">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Cell</th>
+                        <th>Block</th>
+                        <th>Flat No</th>
+                        <th>Complain Type</th>
+                        <th> Complain Description</th>
+                        <th>Request Date</th>
+                        <th>Service provider</th>
+                        <th></th>
+                    </tr>
+                    @foreach (FamilyModel lst in Model.lstmodel)
+                    {
+                        <tr>
+                            <td>@lst.Id</td>
+                            <td>@lst.Name</td>
+                            <td>@lst.Cell</td>
+                            <td>@lst.Block</td>
+                            <td>@lst.Flat_no</td>
+                            <td>@lst.ComplainType</td>
+                            <td>@lst.ComplainDescription</td>
+                            <td>@lst.RequestDate</td>
+                            <td>@lst.Service_Provider</td>
+                            <td>
+                                @Html.ActionLink("DeleteRequest", "DeleteServiceRequest", new { id = lst.Id }, new { onclick = "return confirm('Are you sure you want to delete?');" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+}

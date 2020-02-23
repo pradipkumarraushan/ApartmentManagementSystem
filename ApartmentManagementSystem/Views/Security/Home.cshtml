@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.ActionLink("AddNewVisitor", "AddNewVisitor")
+            </div>
+            <div class="form-group">
+                @*@Html.ActionLink("AddRegularVisitor", "AddRegularVisitor")*@
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.ActionLink("VisitorHistory", "VisitorHistory")
+            </div>
+        </div>
+    </div>
+</div>

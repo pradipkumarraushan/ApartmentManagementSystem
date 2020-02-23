@@ -1,0 +1,94 @@
+﻿@using ApartmentManagementSystem.Models
+@model OwnerTenantRegistrationModel
+@{
+    ViewBag.Title = "AddAssociationMember";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnsearch').click(function () {
+            debugger;
+            var email = $('#Email').val();
+            if (email == "") {
+                // $('#Email').parent().after("<class='validation' style='color:red;'>Please enter email address")
+                $('#emailvalidate').text('Please enter email address');
+                return false;
+            }
+        })
+        $('#btnclear').click(function () {
+            debugger;
+            $('.form-control').val("");
+        })
+    })
+</script>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h2>AddAssociationMember</h2><br />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                @Html.LabelFor(Email => Email.Email):
+                                @Html.TextBoxFor(Email => Email.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Email => Email.Email, "", new { @class = "text-danger",@id="emailvalidate"})
+                            </div>
+                            <div class="col-md-3">
+                                <input type="submit" id="btnsearch" value="Search" name="operation" class="cancel" style="margin-top:30px" />
+                            </div>
+                        </div>
+                    </div><br />
+                          <div class="form-group">
+                              @Html.LabelFor(Fname => Fname.Fname):
+                              @Html.TextBoxFor(Fname => Fname.Fname, new { @class = "form-control" })
+                              @Html.ValidationMessageFor(Fname => Fname.Fname, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                              @Html.LabelFor(Lname => Lname.Lname):
+                              @Html.TextBoxFor(Lname => Lname.Lname, new { @class = "form-control" })
+                              @Html.ValidationMessageFor(Lname => Lname.Lname, "", new { @class = "text-danger" })
+                          </div>
+                          <div class="form-group">
+                              @Html.LabelFor(Age => Age.Age):
+                              @Html.TextBoxFor(Age => Age.Age, new { @class = "form-control" })
+                              @Html.ValidationMessageFor(Age => Age.Age, "", new { @class = "text-danger" })
+                          </div>
+                    <div class="form-group">
+                        @Html.LabelFor(gender => gender.Gender):
+                        @Html.TextBoxFor(Gender => Gender.Gender, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(Cell => Cell.Cell):
+                        @Html.TextBoxFor(Cell => Cell.Cell, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(Cell => Cell.Cell, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(password => password.Password, new { @class = "hidden" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(block => block.Block)
+                        @Html.TextBoxFor(block => block.Block, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(flatno => flatno.Flat_no):
+                        @Html.TextBoxFor(flatno => flatno.Flat_no, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(desigination => desigination.Desigination)
+                        @Html.DropDownListFor(desigination => desigination.Desigination, new SelectList(Model.lstdesigination), "--Select--", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(desigination=>desigination.Desigination,"",new {@class= "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="btnadd" value="Add" name="operation"  style="margin-left:30px" />
+                        <input type="submit" id="btnclear" value="Clear" name="operation" onclick="return false" class="cancel" style="margin-left:130px" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

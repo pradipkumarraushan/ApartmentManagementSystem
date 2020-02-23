@@ -1,0 +1,44 @@
+﻿@using ApartmentManagementSystem.Models
+@model List<OwnerTenantRegistrationModel>
+@{
+    ViewBag.Title = "DisplayAssociationMember";
+}
+
+<h2>DisplayAssociationMember</h2>
+<table border="1" class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Fname</th>
+        <th>Lname</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Cell No</th>
+        <th>Email</th>
+        <th>Block</th>
+        <th>Flat No</th>
+        <th>Desigination</th>
+        <th></th>
+    </tr>
+    @using (Html.BeginForm())
+    {
+        foreach (OwnerTenantRegistrationModel lst in Model)
+        {
+            <tr>
+                <td>@lst.Id</td>
+                <td>@lst.Fname</td>
+                <td>@lst.Lname</td>
+                <td>@lst.Age</td>
+                <td>@lst.Gender</td>
+                <td>@lst.Cell</td>
+                <td>@lst.Email</td>
+                <td>@lst.Block</td>
+                <td>@lst.Flat_no</td>
+                <td>@lst.Desigination</td>
+                <td>
+                    @Html.ActionLink("Remove", "DisplayAssociationMember", new { id = lst.Id }, new { onclick = "return confirm('Are you sure you want to Remove?');" })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

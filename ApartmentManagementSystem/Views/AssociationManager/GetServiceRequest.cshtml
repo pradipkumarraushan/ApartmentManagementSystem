@@ -1,0 +1,41 @@
+﻿@using ApartmentManagementSystem.Models
+@model List<FamilyModel>
+@{
+    ViewBag.Title = "GetServiceRequest";
+}
+
+<h2>GetServiceRequest</h2>
+<table border="1" class="table table-bordered ">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Cell</th>
+        <th>Block</th>
+        <th>Flat No</th>
+        <th>Complain Type</th>
+        <th> Complain Description</th>
+        <th>Request Date</th>
+        <th>Service provider</th>
+        <th></th>
+    </tr>
+    @using (Html.BeginForm())
+    {
+       foreach (FamilyModel lst in Model)
+       {
+        <tr>
+            <td>@lst.Id</td>
+            <td>@lst.Name</td>
+            <td>@lst.Cell</td>
+            <td>@lst.Block</td>
+            <td>@lst.Flat_no</td>
+            <td>@lst.ComplainType</td>
+            <td>@lst.ComplainDescription</td>
+            <td>@lst.RequestDate</td>
+            <td>@lst.Service_Provider</td>
+            <td>
+                @Html.ActionLink("EditRequest", "EditServiceRequest", new { id = lst.Id })
+            </td>
+        </tr>
+       }
+    }
+</table>

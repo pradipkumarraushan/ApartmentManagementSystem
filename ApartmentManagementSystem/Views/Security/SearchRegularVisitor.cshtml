@@ -1,0 +1,93 @@
+﻿@using ApartmentManagementSystem.Models
+@model PagedListModel
+@{
+    ViewBag.Title = "SearchRegularVisitor";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnsearch').click(function () {
+            debugger;
+            var block = $('#Block').val();
+            var flat_no = $('#Flat_no').val();
+            $.ajax({
+                url: "@Url.Action("SearchRegularVisitor","Security")",
+                type: "POST",
+                data: { block: block, flat_no: flat_no },
+                dataType: 'json',
+                success: function (data) {
+                    $('#data tbody').empty();
+                    $.each(data, function (i, data) {
+                        $('#data').append("<tr>"+
+                            "<td>" + data.Name+"</td>"+
+                            "<td>" + data.Age+"</td>"+
+                            "<td>" + data.Gender+"</td>"+
+                            "<td>" + data.Cell+"</td>"+
+                            "<td>" + data.Address+"</td>"+
+                            "<td>" + data.Relation+"</td>"+
+                            "<td>" + data.Member_Name+"</td>"+
+                            "<td>"+data.Block+"</td>"+
+                            "<td>"+data.Flat_no+"</td>"+
+                        "</tr>")
+                    });   
+                }
+            });
+        });
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h2>SearchRegularVisitor</h2>
+                <div class="form-group">
+                    @Html.LabelFor(block => block.Block)
+                    @Html.DropDownListFor(block => block.Block, new SelectList(Model.lstblock), "--select--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(flat_no => flat_no.Flat_no)
+                    @Html.TextBoxFor(flat_no => flat_no.Flat_no, new { @class = "form-control" })
+                </div>
+                <div>
+                    <input type="submit" id="btnsearch" value="Search" onclick="return false" style=" margin-left:100px" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <table id="data" class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Cell</th>
+                        <th>Address</th>
+                        <th>Relation</th>
+                        <th>Member_Name</th>
+                        <th>Block</th>
+                        <th>Flat_no</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(FamilyModel fm in Model.lstmodel)
+                    {
+                        <tr class="list">
+                            <td>@fm.Name</td>
+                            <td>@fm.Age</td>
+                            <td>@fm.Gender</td>
+                            <td>@fm.Cell</td>
+                            <td>@fm.Address</td>
+                            <td>@fm.Relation</td>
+                            <td>@fm.Member_Name</td>
+                            <td>@fm.Block</td>
+                            <td>@fm.Flat_no</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

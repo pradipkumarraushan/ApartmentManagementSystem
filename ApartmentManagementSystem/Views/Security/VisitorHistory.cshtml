@@ -1,0 +1,116 @@
+﻿@using PagedList.Mvc
+@using ApartmentManagementSystem.Models
+@model PagedListModel
+@{
+    ViewBag.Title = "VisitorHistory";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@*<script type="text/javascript">
+    $(document).ready(function () { 
+        $('#btnsearch').click(function () {
+            debugger;
+            var block = $('#Block').val();
+            var flat_no = $('#Flat_no').val();
+            $.ajax({
+                url: "@Url.Action("VisitorHistory","Security")",
+                type: "POST",
+                data: { block: block, flat_no: flat_no },
+                dataType: 'json',
+                success: function (data) {
+                    $('#data tbody').empty();
+                   // $('.pagination').empty();
+                    fn(data);
+                }
+            });
+        });
+    });
+    function fn(data) {
+        debugger;
+        for (i = 0; i < data.pagedlst.length; i++) {
+            $('#data').append("<tbody> <tr> class='list'> <td>" + data.pagedlst[i].Visitor_Id + "</td>" +
+                "<td>" + data.pagedlst[i].VisitorName + "</td>" +
+                "<td>" + data.pagedlst[i].Visitor_Cellno + "</td>" +
+                "<td>" + data.pagedlst[i].Age + "</td>" +
+                "<td>" + data.pagedlst[i].Gender + "</td>" +
+                "<td>" + data.pagedlst[i].Address + "</td>" +
+                "<td>" + data.pagedlst[i].Relation + "</td>" +
+                "<td>" + data.pagedlst[i].MemberName + "</td>" +
+                "<td>" + data.pagedlst[i].Block + "</td>" +
+                "<td>" + data.pagedlst[i].Flatno + "</td>" +
+                "<td>" + data.pagedlst[i].In_Time + "</td>" +
+                "<td>" + data.pagedlst[i].Out_Time + "</td> </tr> </tbody>")
+        }
+        @*$('#container').append("<div class='pagination' style='margin-left: 400px'>" +
+                  "@Html.PagedListPager(data.pagedlst, page => Url.Action("VisitorHistory", new { page }))"+
+                "</div>")
+    }
+</script>*@
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h2>VisitorHistory</h2>
+                <div class="form-group">
+                    @Html.LabelFor(block => block.Block)
+                    @Html.DropDownListFor(block => block.Block, new SelectList(Model.lstblock), "--select--", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(flat_no => flat_no.Flat_no)
+                    @Html.TextBoxFor(flat_no => flat_no.Flat_no, new { @class = "form-control" })
+                </div>
+                <div>
+                    <input type="submit" id="btnsearch" value="Search" name="operation" style=" margin-left:100px" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div  class="row">
+            <table id="data" class="table table-bordered ">
+                <thead>
+                    <tr>
+                        <th>Visitor_Id</th>
+                        <th>Visitor_Name</th>
+                        <th>Visitor_cell</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>Relation</th>
+                        <th>Member_Name</th>
+                        <th>Block</th>
+                        <th>Flat_no</th>
+                        <th>In_Time</th>
+                        <th>Out_Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.pagedlst.Count; i++)
+                    {
+                        <tr class="list">
+                            <td>@Model.pagedlst[i].Visitor_Id</td>
+                            <td>@Model.pagedlst[i].VisitorName</td>
+                            <td>@Model.pagedlst[i].Visitor_Cellno</td>
+                            <td>@Model.pagedlst[i].Age</td>
+                            <td>@Model.pagedlst[i].Gender</td>
+                            <td>@Model.pagedlst[i].Address</td>
+                            <td>@Model.pagedlst[i].Relation</td>
+                            <td>@Model.pagedlst[i].MemberName</td>
+                            <td>@Model.pagedlst[i].Block</td>
+                            <td>@Model.pagedlst[i].Flatno</td>
+                            <td>@Model.pagedlst[i].In_Time</td>
+                            <td>@Model.pagedlst[i].Out_Time</td>
+                        </tr>
+                    }
+                </tbody>  
+            </table>
+            <div id="container" style="margin-left: 20px">
+                <div class="pagination" style="margin-left: 400px">
+                     @Html.PagedListPager(Model.pagedlst, page => Url.Action("VisitorHistory", new { page }))
+                </div>
+            </div>
+        </div>
+    </div>
+}

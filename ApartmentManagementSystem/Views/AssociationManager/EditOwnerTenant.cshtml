@@ -1,0 +1,84 @@
+﻿@using ApartmentManagementSystem.Models
+@model OwnerTenantRegistrationModel
+@{
+    ViewBag.Title = "EditOwnerTenant";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h2>EditOwnerTenant</h2>
+                <div class="form-group">
+                    @Html.LabelFor(Fname => Fname.Fname):
+                    @Html.TextBoxFor(Fname => Fname.Fname, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Lname => Lname.Lname):
+                    @Html.TextBoxFor(Lname => Lname.Lname, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Age => Age.Age):
+                    @Html.TextBoxFor(Age => Age.Age, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(gender => gender.Gender):
+                    @Html.RadioButtonFor(Gender => Gender.Gender, "Male")<label>Male</label>
+                    @Html.RadioButtonFor(Gender => Gender.Gender, "Female")<label>Female</label>
+                    @Html.ValidationMessageFor(Gender => Gender.Gender, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Email => Email.Email):
+                    @Html.TextBoxFor(Email => Email.Email, new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(Cell => Cell.Cell):
+                        @Html.TextBoxFor(Cell => Cell.Cell, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(marital_status => marital_status.Marital_status):
+                        @Html.RadioButtonFor(marital_status => marital_status.Marital_status, "Married")<label>Married</label>
+                        @Html.RadioButtonFor(marital_status => marital_status.Marital_status, "Unmarried")<label>UnMarried</label>
+                        @Html.ValidationMessageFor(marital_status => marital_status.Marital_status, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(occupation => occupation.Occupation):
+                        @Html.TextBoxFor(occupation => occupation.Occupation, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(company => company.Company):
+                        @Html.TextBoxFor(company => company.Company, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(officeaddress => officeaddress.Office_address):
+                        @Html.TextAreaFor(officeaddress => officeaddress.Office_address, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(block => block.Block)
+                        @Html.DropDownListFor(block => block.Block, new SelectList(Model.lstblock), "--Select--", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(flatno => flatno.Flat_no):
+                        @Html.TextBoxFor(flatno => flatno.Flat_no, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(membertype => membertype.Member_type)
+                        @Html.RadioButtonFor(membertype => membertype.Member_type, "Owner")<label>Owner</label>
+                        @Html.RadioButtonFor(membertype => membertype.Member_type, "Tenant")<label>Tenant</label>
+                        @Html.ValidationMessageFor(membertype => membertype.Member_type, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" id="btnupdate" value="Update" name="operation" style=" margin-left:50px" />
+                        <input type="submit" id="btncancel" value="Cancel" name="operation" class="cancel" style=" margin-left:50px" />
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
